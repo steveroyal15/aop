@@ -187,7 +187,7 @@ def p_empty(p):
 
 
 def p_error(p):
-    p[0] = "Syntax error in expression"
+    print("Syntax error in expression")
 
 
 env = {}
