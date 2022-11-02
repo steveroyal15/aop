@@ -9,7 +9,8 @@ import sys
 reserve = {
     'print': 'PRINT',
     'DRAW': 'DRAW',
-    'SET': 'SET'
+    'SET': 'SET',
+    'exit': 'EXIT'
 }
 
 tokens = [
@@ -53,15 +54,15 @@ def t_INT(t):
 
 
 def t_SHAPE(t):
-    r'Shapes.Rectangle|Shapes.Circle|Shapes.Line|Shapes.Square'
-    t.value = t.value.split('.', 1)[1]
+    r'RECTANGLE|CIRCLE|LINE|SQUARE'
+    t.value = t.value
     t.type = "SHAPE"
     return t
 
 
 def t_COLOR(t):
-    r'Colors.Red|Colors.Blue|Colors.Green|Colors.Black|Colors.Yellow|Colors.Organge'
-    t.value = t.value.split('.', 1)[1]
+    r'RED|BLUE|GREEN|BLACK|YELLOW|ORANGE'
+    t.value = t.value
     t.type = "COLOR"
     return t
 
@@ -90,6 +91,7 @@ lexer = lex.lex()
 
 precedence = (
 
+
 )
 
 
@@ -99,6 +101,7 @@ def p_run(p):
         | get_var
         | print
         | draw
+        | exit_program
     '''
     run(p[1])
 
@@ -113,6 +116,13 @@ var_assign : SET IDENTIFIER EQUALS INT
            | SET IDENTIFIER EQUALS IDENTIFIER
     '''
     p[0] = ('SET', p[2], p[4])
+
+
+def p_exit_program(p):
+    '''
+    exit_program : EXIT LPAREN RPAREN
+    '''
+    p[0] = ('exit_program', p[1])
 
 
 def p_get_var(p):
@@ -147,6 +157,7 @@ def p_drawCircle(p):
 def p_drawRec(p):
     '''
     drawRec : DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression
+            | DRAW get_var expression COMMA expression COMMA expression COMMA expression COMMA expression
     '''
     p[0] = ('draw', p[2], p[3], p[5], p[7], p[9], p[11])
 
@@ -171,20 +182,26 @@ def run(p):
         if p[0] == 'SET':
             env[p[1]] = p[2]
         elif p[0] == 'var':
-            return env.get(p[1])
+            if env.get(p[1]) != None:
+                return env.get(p[1])
+            else:
+                print(
+                    "Syntax error the variable {} was not declared.".format(p[1]))
+                return 'undefined'
+
         elif (p[0] == 'expression'):
             return run(p[1])
         elif p[0] == "print":
             print(run(p[1]))
         elif p[0] == "draw":
-            if (p[1][1] == 'Circle'):
+            if (run(p[1][1]) == 'CIRCLE'):
                 parsetree = p[1]
                 midpoint = run(parsetree[2])
                 radius = run(parsetree[3])
                 color = run(parsetree[4])
                 env['DrawCanvas'] = draw.DrawShape()
                 env['DrawCanvas'].drawCircle(midpoint, radius, color)
-            elif (p[1][1] == 'Rectangle'):
+            elif (run(p[1][1]) == 'RECTANGLE'):
                 parsetree = p[1]
                 topleftx = run(parsetree[2])
                 toplefty = run(parsetree[3])
@@ -194,6 +211,11 @@ def run(p):
                 env['DrawCanvas'] = draw.DrawShape()
                 env['DrawCanvas'].drawRec(
                     topleftx, toplefty, length, width, color)
+            else:
+                print("Syntax error {} is not a Shape. Bad expression".format(
+                    run(p[1][1])))
+        elif p[0] == "exit_program":
+            raise EOFError
         else:
             return p
 
@@ -206,6 +228,6 @@ parser = yacc.yacc()
 while True:
     try:
         s = input('Geo >>')
+        parser.parse(s)
     except EOFError:
         break
-    parser.parse(s)

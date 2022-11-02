@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'COLOR COMMA DRAW EQUALS FLOAT IDENTIFIER INT LPAREN POINTS PRINT RPAREN SET SHAPE\n    run : var_assign\n        | get_var\n        | print\n        | draw\n    \nvar_assign : SET IDENTIFIER EQUALS INT\n           | SET IDENTIFIER EQUALS FLOAT\n           | SET IDENTIFIER EQUALS SHAPE\n           | SET IDENTIFIER EQUALS COLOR\n           | SET IDENTIFIER EQUALS POINTS\n           | SET IDENTIFIER EQUALS IDENTIFIER\n    \n    get_var : IDENTIFIER\n    \n    print : PRINT LPAREN expression RPAREN\n    \n    draw : drawRec\n         | drawCircle\n    \n    drawCircle : DRAW SHAPE expression COMMA expression COMMA expression\n    \n    drawRec : DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression\n    \n    expression : get_var\n               | INT\n               | FLOAT\n               | POINTS\n               | COLOR\n    '
+_lr_signature = 'COLOR COMMA DRAW EQUALS EXIT FLOAT IDENTIFIER INT LPAREN POINTS PRINT RPAREN SET SHAPE\n    run : var_assign\n        | get_var\n        | print\n        | draw\n        | exit_program\n    \nvar_assign : SET IDENTIFIER EQUALS INT\n           | SET IDENTIFIER EQUALS FLOAT\n           | SET IDENTIFIER EQUALS SHAPE\n           | SET IDENTIFIER EQUALS COLOR\n           | SET IDENTIFIER EQUALS POINTS\n           | SET IDENTIFIER EQUALS IDENTIFIER\n    \n    exit_program : EXIT LPAREN RPAREN\n    \n    get_var : IDENTIFIER\n    \n    print : PRINT LPAREN expression RPAREN\n    \n    draw : drawRec\n         | drawCircle\n    \n    drawCircle : DRAW SHAPE expression COMMA expression COMMA expression\n    \n    drawRec : DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression\n            | DRAW get_var expression COMMA expression COMMA expression COMMA expression COMMA expression\n    \n    expression : get_var\n               | INT\n               | FLOAT\n               | POINTS\n               | COLOR\n    '
     
-_lr_action_items = {'SET':([0,],[6,]),'IDENTIFIER':([0,6,13,14,15,30,32,34,36,],[7,12,7,7,23,7,7,7,7,]),'PRINT':([0,],[8,]),'DRAW':([0,],[11,]),'$end':([1,2,3,4,5,7,9,10,17,18,19,20,21,23,24,25,26,27,28,29,33,37,],[0,-1,-2,-3,-4,-11,-13,-14,-17,-18,-19,-20,-21,-10,-5,-6,-7,-8,-9,-12,-15,-16,]),'RPAREN':([7,16,17,18,19,20,21,],[-11,29,-17,-18,-19,-20,-21,]),'COMMA':([7,17,18,19,20,21,22,31,33,35,],[-11,-17,-18,-19,-20,-21,30,32,34,36,]),'LPAREN':([8,],[13,]),'SHAPE':([11,15,],[14,26,]),'EQUALS':([12,],[15,]),'INT':([13,14,15,30,32,34,36,],[18,18,24,18,18,18,18,]),'FLOAT':([13,14,15,30,32,34,36,],[19,19,25,19,19,19,19,]),'POINTS':([13,14,15,30,32,34,36,],[20,20,28,20,20,20,20,]),'COLOR':([13,14,15,30,32,34,36,],[21,21,27,21,21,21,21,]),}
+_lr_action_items = {'SET':([0,],[7,]),'IDENTIFIER':([0,7,8,13,15,17,18,19,36,37,40,41,44,45,48,49,],[8,14,-13,8,8,8,8,29,8,8,8,8,8,8,8,8,]),'PRINT':([0,],[9,]),'EXIT':([0,],[12,]),'DRAW':([0,],[13,]),'$end':([1,2,3,4,5,6,8,10,11,21,22,23,24,25,26,29,30,31,32,33,34,35,42,50,51,],[0,-1,-2,-3,-4,-5,-13,-15,-16,-20,-21,-22,-23,-24,-12,-11,-6,-7,-8,-9,-10,-14,-17,-18,-19,]),'INT':([8,15,17,18,19,36,37,40,41,44,45,48,49,],[-13,22,22,22,30,22,22,22,22,22,22,22,22,]),'FLOAT':([8,15,17,18,19,36,37,40,41,44,45,48,49,],[-13,23,23,23,31,23,23,23,23,23,23,23,23,]),'POINTS':([8,15,17,18,19,36,37,40,41,44,45,48,49,],[-13,24,24,24,34,24,24,24,24,24,24,24,24,]),'COLOR':([8,15,17,18,19,36,37,40,41,44,45,48,49,],[-13,25,25,25,33,25,25,25,25,25,25,25,25,]),'RPAREN':([8,16,20,21,22,23,24,25,],[-13,26,35,-20,-21,-22,-23,-24,]),'COMMA':([8,21,22,23,24,25,27,28,38,39,42,43,46,47,],[-13,-20,-21,-22,-23,-24,36,37,40,41,44,45,48,49,]),'LPAREN':([9,12,],[15,16,]),'SHAPE':([13,19,],[17,32,]),'EQUALS':([14,],[19,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'run':([0,],[1,]),'var_assign':([0,],[2,]),'get_var':([0,13,14,30,32,34,36,],[3,17,17,17,17,17,17,]),'print':([0,],[4,]),'draw':([0,],[5,]),'drawRec':([0,],[9,]),'drawCircle':([0,],[10,]),'expression':([13,14,30,32,34,36,],[16,22,31,33,35,37,]),}
+_lr_goto_items = {'run':([0,],[1,]),'var_assign':([0,],[2,]),'get_var':([0,13,15,17,18,36,37,40,41,44,45,48,49,],[3,18,21,21,21,21,21,21,21,21,21,21,21,]),'print':([0,],[4,]),'draw':([0,],[5,]),'exit_program':([0,],[6,]),'drawRec':([0,],[10,]),'drawCircle':([0,],[11,]),'expression':([15,17,18,36,37,40,41,44,45,48,49,],[20,27,28,38,39,42,43,46,47,50,51,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,25 +27,28 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> run","S'",1,None,None,None),
-  ('run -> var_assign','run',1,'p_run','lexer.py',96),
-  ('run -> get_var','run',1,'p_run','lexer.py',97),
-  ('run -> print','run',1,'p_run','lexer.py',98),
-  ('run -> draw','run',1,'p_run','lexer.py',99),
-  ('var_assign -> SET IDENTIFIER EQUALS INT','var_assign',4,'p_var_assign','lexer.py',106),
-  ('var_assign -> SET IDENTIFIER EQUALS FLOAT','var_assign',4,'p_var_assign','lexer.py',107),
-  ('var_assign -> SET IDENTIFIER EQUALS SHAPE','var_assign',4,'p_var_assign','lexer.py',108),
-  ('var_assign -> SET IDENTIFIER EQUALS COLOR','var_assign',4,'p_var_assign','lexer.py',109),
-  ('var_assign -> SET IDENTIFIER EQUALS POINTS','var_assign',4,'p_var_assign','lexer.py',110),
-  ('var_assign -> SET IDENTIFIER EQUALS IDENTIFIER','var_assign',4,'p_var_assign','lexer.py',111),
-  ('get_var -> IDENTIFIER','get_var',1,'p_get_var','lexer.py',118),
-  ('print -> PRINT LPAREN expression RPAREN','print',4,'p_print','lexer.py',125),
-  ('draw -> drawRec','draw',1,'p_draw_shape','lexer.py',132),
-  ('draw -> drawCircle','draw',1,'p_draw_shape','lexer.py',133),
-  ('drawCircle -> DRAW SHAPE expression COMMA expression COMMA expression','drawCircle',7,'p_drawCircle','lexer.py',140),
-  ('drawRec -> DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression','drawRec',11,'p_drawRec','lexer.py',147),
-  ('expression -> get_var','expression',1,'p_experession','lexer.py',154),
-  ('expression -> INT','expression',1,'p_experession','lexer.py',155),
-  ('expression -> FLOAT','expression',1,'p_experession','lexer.py',156),
-  ('expression -> POINTS','expression',1,'p_experession','lexer.py',157),
-  ('expression -> COLOR','expression',1,'p_experession','lexer.py',158),
+  ('run -> var_assign','run',1,'p_run','geo.py',100),
+  ('run -> get_var','run',1,'p_run','geo.py',101),
+  ('run -> print','run',1,'p_run','geo.py',102),
+  ('run -> draw','run',1,'p_run','geo.py',103),
+  ('run -> exit_program','run',1,'p_run','geo.py',104),
+  ('var_assign -> SET IDENTIFIER EQUALS INT','var_assign',4,'p_var_assign','geo.py',111),
+  ('var_assign -> SET IDENTIFIER EQUALS FLOAT','var_assign',4,'p_var_assign','geo.py',112),
+  ('var_assign -> SET IDENTIFIER EQUALS SHAPE','var_assign',4,'p_var_assign','geo.py',113),
+  ('var_assign -> SET IDENTIFIER EQUALS COLOR','var_assign',4,'p_var_assign','geo.py',114),
+  ('var_assign -> SET IDENTIFIER EQUALS POINTS','var_assign',4,'p_var_assign','geo.py',115),
+  ('var_assign -> SET IDENTIFIER EQUALS IDENTIFIER','var_assign',4,'p_var_assign','geo.py',116),
+  ('exit_program -> EXIT LPAREN RPAREN','exit_program',3,'p_exit_program','geo.py',123),
+  ('get_var -> IDENTIFIER','get_var',1,'p_get_var','geo.py',130),
+  ('print -> PRINT LPAREN expression RPAREN','print',4,'p_print','geo.py',137),
+  ('draw -> drawRec','draw',1,'p_draw_shape','geo.py',144),
+  ('draw -> drawCircle','draw',1,'p_draw_shape','geo.py',145),
+  ('drawCircle -> DRAW SHAPE expression COMMA expression COMMA expression','drawCircle',7,'p_drawCircle','geo.py',152),
+  ('drawRec -> DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression','drawRec',11,'p_drawRec','geo.py',159),
+  ('drawRec -> DRAW get_var expression COMMA expression COMMA expression COMMA expression COMMA expression','drawRec',11,'p_drawRec','geo.py',160),
+  ('expression -> get_var','expression',1,'p_experession','geo.py',167),
+  ('expression -> INT','expression',1,'p_experession','geo.py',168),
+  ('expression -> FLOAT','expression',1,'p_experession','geo.py',169),
+  ('expression -> POINTS','expression',1,'p_experession','geo.py',170),
+  ('expression -> COLOR','expression',1,'p_experession','geo.py',171),
 ]
