@@ -102,8 +102,14 @@ def p_run(p):
         | print
         | draw
         | exit_program
+        | empty
     '''
-    run(p[1])
+    if (p[1] == None):
+        run(p[1])
+    elif (type(p[1]) == tuple and p[1][0] == 'SET'):
+        run(p[1])
+    else:
+        print(run(p[1]))
 
 
 def p_var_assign(p):
@@ -173,6 +179,17 @@ def p_experession(p):
     p[0] = ('expression', p[1])
 
 
+def p_empty(p):
+    '''
+    empty :
+    '''
+    p[0] = None
+
+
+def p_error(p):
+    p[0] = "Syntax error in expression"
+
+
 env = {}
 
 
@@ -182,17 +199,15 @@ def run(p):
         if p[0] == 'SET':
             env[p[1]] = p[2]
         elif p[0] == 'var':
-            if env.get(p[1]) != None:
-                return env.get(p[1])
+            if p[1] in env:
+                p = env.get(p[1])
+                return p
             else:
-                print(
-                    "Syntax error the variable {} was not declared.".format(p[1]))
-                return 'undefined'
-
+                return 'undeclared variable found'.format(run(p[1]))
         elif (p[0] == 'expression'):
             return run(p[1])
         elif p[0] == "print":
-            print(run(p[1]))
+            return run(p[1])
         elif p[0] == "draw":
             if (run(p[1][1]) == 'CIRCLE'):
                 parsetree = p[1]
@@ -218,7 +233,6 @@ def run(p):
             raise EOFError
         else:
             return p
-
     else:
         return p
 
