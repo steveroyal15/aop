@@ -1,8 +1,7 @@
-from typing import Tuple
+
 import ply.lex as lex
 import ply.yacc as yacc
-from pyparsing import col
-import draw
+
 
 import sys
 
@@ -104,12 +103,9 @@ def p_run(p):
         | exit_program
         | empty
     '''
-    if (p[1] == None):
-        run(p[1])
-    elif (type(p[1]) == tuple and p[1][0] == 'SET'):
-        run(p[1])
-    else:
-        print(run(p[1]))
+    result = run(p[1])
+    if (result != None):
+        print(result)
 
 
 def p_var_assign(p):
@@ -207,13 +203,15 @@ def run(p):
         elif (p[0] == 'expression'):
             return run(p[1])
         elif p[0] == "print":
-            return run(p[1])
+            p = run(p[1])
+            return p
         elif p[0] == "draw":
             if (run(p[1][1]) == 'CIRCLE'):
                 parsetree = p[1]
                 midpoint = run(parsetree[2])
                 radius = run(parsetree[3])
                 color = run(parsetree[4])
+                import draw as draw
                 env['DrawCanvas'] = draw.DrawShape()
                 env['DrawCanvas'].drawCircle(midpoint, radius, color)
             elif (run(p[1][1]) == 'RECTANGLE'):
@@ -223,6 +221,7 @@ def run(p):
                 length = run(parsetree[4])
                 width = run(parsetree[5])
                 color = run(parsetree[6])
+                import draw as draw
                 env['DrawCanvas'] = draw.DrawShape()
                 env['DrawCanvas'].drawRec(
                     topleftx, toplefty, length, width, color)
