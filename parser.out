@@ -1,1 +1,697 @@
 Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> run
+Rule 1     run -> var_assign
+Rule 2     run -> get_var
+Rule 3     run -> print
+Rule 4     run -> draw
+Rule 5     run -> exit_program
+Rule 6     run -> empty
+Rule 7     var_assign -> SET IDENTIFIER EQUALS INT
+Rule 8     var_assign -> SET IDENTIFIER EQUALS FLOAT
+Rule 9     var_assign -> SET IDENTIFIER EQUALS SHAPE
+Rule 10    var_assign -> SET IDENTIFIER EQUALS COLOR
+Rule 11    var_assign -> SET IDENTIFIER EQUALS POINTS
+Rule 12    var_assign -> SET IDENTIFIER EQUALS get_var
+Rule 13    exit_program -> EXIT LPAREN RPAREN
+Rule 14    get_var -> IDENTIFIER
+Rule 15    print -> PRINT LPAREN expression RPAREN
+Rule 16    draw -> drawRec
+Rule 17    draw -> drawCircle
+Rule 18    drawCircle -> DRAW SHAPE expression COMMA expression COMMA expression
+Rule 19    drawCircle -> DRAW expression expression COMMA expression COMMA expression
+Rule 20    drawRec -> DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression
+Rule 21    drawRec -> DRAW expression expression COMMA expression COMMA expression COMMA expression COMMA expression
+Rule 22    expression -> get_var
+Rule 23    expression -> INT
+Rule 24    expression -> FLOAT
+Rule 25    expression -> POINTS
+Rule 26    expression -> COLOR
+Rule 27    empty -> <empty>
+
+Terminals, with rules where they appear
+
+COLOR                : 10 26
+COMMA                : 18 18 19 19 20 20 20 20 21 21 21 21
+DRAW                 : 18 19 20 21
+EQUALS               : 7 8 9 10 11 12
+EXIT                 : 13
+FLOAT                : 8 24
+IDENTIFIER           : 7 8 9 10 11 12 14
+INT                  : 7 23
+LPAREN               : 13 15
+POINTS               : 11 25
+PRINT                : 15
+RPAREN               : 13 15
+SET                  : 7 8 9 10 11 12
+SHAPE                : 9 18 20
+error                : 
+
+Nonterminals, with rules where they appear
+
+draw                 : 4
+drawCircle           : 17
+drawRec              : 16
+empty                : 6
+exit_program         : 5
+expression           : 15 18 18 18 19 19 19 19 20 20 20 20 20 21 21 21 21 21 21
+get_var              : 2 12 22
+print                : 3
+run                  : 0
+var_assign           : 1
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . run
+    (1) run -> . var_assign
+    (2) run -> . get_var
+    (3) run -> . print
+    (4) run -> . draw
+    (5) run -> . exit_program
+    (6) run -> . empty
+    (7) var_assign -> . SET IDENTIFIER EQUALS INT
+    (8) var_assign -> . SET IDENTIFIER EQUALS FLOAT
+    (9) var_assign -> . SET IDENTIFIER EQUALS SHAPE
+    (10) var_assign -> . SET IDENTIFIER EQUALS COLOR
+    (11) var_assign -> . SET IDENTIFIER EQUALS POINTS
+    (12) var_assign -> . SET IDENTIFIER EQUALS get_var
+    (14) get_var -> . IDENTIFIER
+    (15) print -> . PRINT LPAREN expression RPAREN
+    (16) draw -> . drawRec
+    (17) draw -> . drawCircle
+    (13) exit_program -> . EXIT LPAREN RPAREN
+    (27) empty -> .
+    (20) drawRec -> . DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression
+    (21) drawRec -> . DRAW expression expression COMMA expression COMMA expression COMMA expression COMMA expression
+    (18) drawCircle -> . DRAW SHAPE expression COMMA expression COMMA expression
+    (19) drawCircle -> . DRAW expression expression COMMA expression COMMA expression
+
+    SET             shift and go to state 8
+    IDENTIFIER      shift and go to state 9
+    PRINT           shift and go to state 10
+    EXIT            shift and go to state 13
+    $end            reduce using rule 27 (empty -> .)
+    DRAW            shift and go to state 14
+
+    run                            shift and go to state 1
+    var_assign                     shift and go to state 2
+    get_var                        shift and go to state 3
+    print                          shift and go to state 4
+    draw                           shift and go to state 5
+    exit_program                   shift and go to state 6
+    empty                          shift and go to state 7
+    drawRec                        shift and go to state 11
+    drawCircle                     shift and go to state 12
+
+state 1
+
+    (0) S' -> run .
+
+
+
+state 2
+
+    (1) run -> var_assign .
+
+    $end            reduce using rule 1 (run -> var_assign .)
+
+
+state 3
+
+    (2) run -> get_var .
+
+    $end            reduce using rule 2 (run -> get_var .)
+
+
+state 4
+
+    (3) run -> print .
+
+    $end            reduce using rule 3 (run -> print .)
+
+
+state 5
+
+    (4) run -> draw .
+
+    $end            reduce using rule 4 (run -> draw .)
+
+
+state 6
+
+    (5) run -> exit_program .
+
+    $end            reduce using rule 5 (run -> exit_program .)
+
+
+state 7
+
+    (6) run -> empty .
+
+    $end            reduce using rule 6 (run -> empty .)
+
+
+state 8
+
+    (7) var_assign -> SET . IDENTIFIER EQUALS INT
+    (8) var_assign -> SET . IDENTIFIER EQUALS FLOAT
+    (9) var_assign -> SET . IDENTIFIER EQUALS SHAPE
+    (10) var_assign -> SET . IDENTIFIER EQUALS COLOR
+    (11) var_assign -> SET . IDENTIFIER EQUALS POINTS
+    (12) var_assign -> SET . IDENTIFIER EQUALS get_var
+
+    IDENTIFIER      shift and go to state 15
+
+
+state 9
+
+    (14) get_var -> IDENTIFIER .
+
+    $end            reduce using rule 14 (get_var -> IDENTIFIER .)
+    INT             reduce using rule 14 (get_var -> IDENTIFIER .)
+    FLOAT           reduce using rule 14 (get_var -> IDENTIFIER .)
+    POINTS          reduce using rule 14 (get_var -> IDENTIFIER .)
+    COLOR           reduce using rule 14 (get_var -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 14 (get_var -> IDENTIFIER .)
+    RPAREN          reduce using rule 14 (get_var -> IDENTIFIER .)
+    COMMA           reduce using rule 14 (get_var -> IDENTIFIER .)
+
+
+state 10
+
+    (15) print -> PRINT . LPAREN expression RPAREN
+
+    LPAREN          shift and go to state 16
+
+
+state 11
+
+    (16) draw -> drawRec .
+
+    $end            reduce using rule 16 (draw -> drawRec .)
+
+
+state 12
+
+    (17) draw -> drawCircle .
+
+    $end            reduce using rule 17 (draw -> drawCircle .)
+
+
+state 13
+
+    (13) exit_program -> EXIT . LPAREN RPAREN
+
+    LPAREN          shift and go to state 17
+
+
+state 14
+
+    (20) drawRec -> DRAW . SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression
+    (21) drawRec -> DRAW . expression expression COMMA expression COMMA expression COMMA expression COMMA expression
+    (18) drawCircle -> DRAW . SHAPE expression COMMA expression COMMA expression
+    (19) drawCircle -> DRAW . expression expression COMMA expression COMMA expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    SHAPE           shift and go to state 18
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 19
+    get_var                        shift and go to state 20
+
+state 15
+
+    (7) var_assign -> SET IDENTIFIER . EQUALS INT
+    (8) var_assign -> SET IDENTIFIER . EQUALS FLOAT
+    (9) var_assign -> SET IDENTIFIER . EQUALS SHAPE
+    (10) var_assign -> SET IDENTIFIER . EQUALS COLOR
+    (11) var_assign -> SET IDENTIFIER . EQUALS POINTS
+    (12) var_assign -> SET IDENTIFIER . EQUALS get_var
+
+    EQUALS          shift and go to state 25
+
+
+state 16
+
+    (15) print -> PRINT LPAREN . expression RPAREN
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 26
+    get_var                        shift and go to state 20
+
+state 17
+
+    (13) exit_program -> EXIT LPAREN . RPAREN
+
+    RPAREN          shift and go to state 27
+
+
+state 18
+
+    (20) drawRec -> DRAW SHAPE . expression COMMA expression COMMA expression COMMA expression COMMA expression
+    (18) drawCircle -> DRAW SHAPE . expression COMMA expression COMMA expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 28
+    get_var                        shift and go to state 20
+
+state 19
+
+    (21) drawRec -> DRAW expression . expression COMMA expression COMMA expression COMMA expression COMMA expression
+    (19) drawCircle -> DRAW expression . expression COMMA expression COMMA expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 29
+    get_var                        shift and go to state 20
+
+state 20
+
+    (22) expression -> get_var .
+
+    INT             reduce using rule 22 (expression -> get_var .)
+    FLOAT           reduce using rule 22 (expression -> get_var .)
+    POINTS          reduce using rule 22 (expression -> get_var .)
+    COLOR           reduce using rule 22 (expression -> get_var .)
+    IDENTIFIER      reduce using rule 22 (expression -> get_var .)
+    RPAREN          reduce using rule 22 (expression -> get_var .)
+    COMMA           reduce using rule 22 (expression -> get_var .)
+    $end            reduce using rule 22 (expression -> get_var .)
+
+
+state 21
+
+    (23) expression -> INT .
+
+    INT             reduce using rule 23 (expression -> INT .)
+    FLOAT           reduce using rule 23 (expression -> INT .)
+    POINTS          reduce using rule 23 (expression -> INT .)
+    COLOR           reduce using rule 23 (expression -> INT .)
+    IDENTIFIER      reduce using rule 23 (expression -> INT .)
+    RPAREN          reduce using rule 23 (expression -> INT .)
+    COMMA           reduce using rule 23 (expression -> INT .)
+    $end            reduce using rule 23 (expression -> INT .)
+
+
+state 22
+
+    (24) expression -> FLOAT .
+
+    INT             reduce using rule 24 (expression -> FLOAT .)
+    FLOAT           reduce using rule 24 (expression -> FLOAT .)
+    POINTS          reduce using rule 24 (expression -> FLOAT .)
+    COLOR           reduce using rule 24 (expression -> FLOAT .)
+    IDENTIFIER      reduce using rule 24 (expression -> FLOAT .)
+    RPAREN          reduce using rule 24 (expression -> FLOAT .)
+    COMMA           reduce using rule 24 (expression -> FLOAT .)
+    $end            reduce using rule 24 (expression -> FLOAT .)
+
+
+state 23
+
+    (25) expression -> POINTS .
+
+    INT             reduce using rule 25 (expression -> POINTS .)
+    FLOAT           reduce using rule 25 (expression -> POINTS .)
+    POINTS          reduce using rule 25 (expression -> POINTS .)
+    COLOR           reduce using rule 25 (expression -> POINTS .)
+    IDENTIFIER      reduce using rule 25 (expression -> POINTS .)
+    RPAREN          reduce using rule 25 (expression -> POINTS .)
+    COMMA           reduce using rule 25 (expression -> POINTS .)
+    $end            reduce using rule 25 (expression -> POINTS .)
+
+
+state 24
+
+    (26) expression -> COLOR .
+
+    INT             reduce using rule 26 (expression -> COLOR .)
+    FLOAT           reduce using rule 26 (expression -> COLOR .)
+    POINTS          reduce using rule 26 (expression -> COLOR .)
+    COLOR           reduce using rule 26 (expression -> COLOR .)
+    IDENTIFIER      reduce using rule 26 (expression -> COLOR .)
+    RPAREN          reduce using rule 26 (expression -> COLOR .)
+    COMMA           reduce using rule 26 (expression -> COLOR .)
+    $end            reduce using rule 26 (expression -> COLOR .)
+
+
+state 25
+
+    (7) var_assign -> SET IDENTIFIER EQUALS . INT
+    (8) var_assign -> SET IDENTIFIER EQUALS . FLOAT
+    (9) var_assign -> SET IDENTIFIER EQUALS . SHAPE
+    (10) var_assign -> SET IDENTIFIER EQUALS . COLOR
+    (11) var_assign -> SET IDENTIFIER EQUALS . POINTS
+    (12) var_assign -> SET IDENTIFIER EQUALS . get_var
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 30
+    FLOAT           shift and go to state 31
+    SHAPE           shift and go to state 32
+    COLOR           shift and go to state 33
+    POINTS          shift and go to state 34
+    IDENTIFIER      shift and go to state 9
+
+    get_var                        shift and go to state 35
+
+state 26
+
+    (15) print -> PRINT LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 36
+
+
+state 27
+
+    (13) exit_program -> EXIT LPAREN RPAREN .
+
+    $end            reduce using rule 13 (exit_program -> EXIT LPAREN RPAREN .)
+
+
+state 28
+
+    (20) drawRec -> DRAW SHAPE expression . COMMA expression COMMA expression COMMA expression COMMA expression
+    (18) drawCircle -> DRAW SHAPE expression . COMMA expression COMMA expression
+
+    COMMA           shift and go to state 37
+
+
+state 29
+
+    (21) drawRec -> DRAW expression expression . COMMA expression COMMA expression COMMA expression COMMA expression
+    (19) drawCircle -> DRAW expression expression . COMMA expression COMMA expression
+
+    COMMA           shift and go to state 38
+
+
+state 30
+
+    (7) var_assign -> SET IDENTIFIER EQUALS INT .
+
+    $end            reduce using rule 7 (var_assign -> SET IDENTIFIER EQUALS INT .)
+
+
+state 31
+
+    (8) var_assign -> SET IDENTIFIER EQUALS FLOAT .
+
+    $end            reduce using rule 8 (var_assign -> SET IDENTIFIER EQUALS FLOAT .)
+
+
+state 32
+
+    (9) var_assign -> SET IDENTIFIER EQUALS SHAPE .
+
+    $end            reduce using rule 9 (var_assign -> SET IDENTIFIER EQUALS SHAPE .)
+
+
+state 33
+
+    (10) var_assign -> SET IDENTIFIER EQUALS COLOR .
+
+    $end            reduce using rule 10 (var_assign -> SET IDENTIFIER EQUALS COLOR .)
+
+
+state 34
+
+    (11) var_assign -> SET IDENTIFIER EQUALS POINTS .
+
+    $end            reduce using rule 11 (var_assign -> SET IDENTIFIER EQUALS POINTS .)
+
+
+state 35
+
+    (12) var_assign -> SET IDENTIFIER EQUALS get_var .
+
+    $end            reduce using rule 12 (var_assign -> SET IDENTIFIER EQUALS get_var .)
+
+
+state 36
+
+    (15) print -> PRINT LPAREN expression RPAREN .
+
+    $end            reduce using rule 15 (print -> PRINT LPAREN expression RPAREN .)
+
+
+state 37
+
+    (20) drawRec -> DRAW SHAPE expression COMMA . expression COMMA expression COMMA expression COMMA expression
+    (18) drawCircle -> DRAW SHAPE expression COMMA . expression COMMA expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 39
+    get_var                        shift and go to state 20
+
+state 38
+
+    (21) drawRec -> DRAW expression expression COMMA . expression COMMA expression COMMA expression COMMA expression
+    (19) drawCircle -> DRAW expression expression COMMA . expression COMMA expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 40
+    get_var                        shift and go to state 20
+
+state 39
+
+    (20) drawRec -> DRAW SHAPE expression COMMA expression . COMMA expression COMMA expression COMMA expression
+    (18) drawCircle -> DRAW SHAPE expression COMMA expression . COMMA expression
+
+    COMMA           shift and go to state 41
+
+
+state 40
+
+    (21) drawRec -> DRAW expression expression COMMA expression . COMMA expression COMMA expression COMMA expression
+    (19) drawCircle -> DRAW expression expression COMMA expression . COMMA expression
+
+    COMMA           shift and go to state 42
+
+
+state 41
+
+    (20) drawRec -> DRAW SHAPE expression COMMA expression COMMA . expression COMMA expression COMMA expression
+    (18) drawCircle -> DRAW SHAPE expression COMMA expression COMMA . expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 43
+    get_var                        shift and go to state 20
+
+state 42
+
+    (21) drawRec -> DRAW expression expression COMMA expression COMMA . expression COMMA expression COMMA expression
+    (19) drawCircle -> DRAW expression expression COMMA expression COMMA . expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 44
+    get_var                        shift and go to state 20
+
+state 43
+
+    (20) drawRec -> DRAW SHAPE expression COMMA expression COMMA expression . COMMA expression COMMA expression
+    (18) drawCircle -> DRAW SHAPE expression COMMA expression COMMA expression .
+
+    COMMA           shift and go to state 45
+    $end            reduce using rule 18 (drawCircle -> DRAW SHAPE expression COMMA expression COMMA expression .)
+
+
+state 44
+
+    (21) drawRec -> DRAW expression expression COMMA expression COMMA expression . COMMA expression COMMA expression
+    (19) drawCircle -> DRAW expression expression COMMA expression COMMA expression .
+
+    COMMA           shift and go to state 46
+    $end            reduce using rule 19 (drawCircle -> DRAW expression expression COMMA expression COMMA expression .)
+
+
+state 45
+
+    (20) drawRec -> DRAW SHAPE expression COMMA expression COMMA expression COMMA . expression COMMA expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 47
+    get_var                        shift and go to state 20
+
+state 46
+
+    (21) drawRec -> DRAW expression expression COMMA expression COMMA expression COMMA . expression COMMA expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 48
+    get_var                        shift and go to state 20
+
+state 47
+
+    (20) drawRec -> DRAW SHAPE expression COMMA expression COMMA expression COMMA expression . COMMA expression
+
+    COMMA           shift and go to state 49
+
+
+state 48
+
+    (21) drawRec -> DRAW expression expression COMMA expression COMMA expression COMMA expression . COMMA expression
+
+    COMMA           shift and go to state 50
+
+
+state 49
+
+    (20) drawRec -> DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA . expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 51
+    get_var                        shift and go to state 20
+
+state 50
+
+    (21) drawRec -> DRAW expression expression COMMA expression COMMA expression COMMA expression COMMA . expression
+    (22) expression -> . get_var
+    (23) expression -> . INT
+    (24) expression -> . FLOAT
+    (25) expression -> . POINTS
+    (26) expression -> . COLOR
+    (14) get_var -> . IDENTIFIER
+
+    INT             shift and go to state 21
+    FLOAT           shift and go to state 22
+    POINTS          shift and go to state 23
+    COLOR           shift and go to state 24
+    IDENTIFIER      shift and go to state 9
+
+    expression                     shift and go to state 52
+    get_var                        shift and go to state 20
+
+state 51
+
+    (20) drawRec -> DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression .
+
+    $end            reduce using rule 20 (drawRec -> DRAW SHAPE expression COMMA expression COMMA expression COMMA expression COMMA expression .)
+
+
+state 52
+
+    (21) drawRec -> DRAW expression expression COMMA expression COMMA expression COMMA expression COMMA expression .
+
+    $end            reduce using rule 21 (drawRec -> DRAW expression expression COMMA expression COMMA expression COMMA expression COMMA expression .)
+

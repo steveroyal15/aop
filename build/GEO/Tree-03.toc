@@ -1,0 +1,5 @@
+('/Library/Frameworks/Python.framework/Versions/3.10/lib/python3.10/site-packages/ply-3.11-py3.10.egg',
+ None,
+ {'*.cpython-310-darwin.so', '*.abi3.so', '*.py', 'EGG-INFO', '*.pyc', '*.so'},
+ 'DATA',
+ [])
